@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="ФИО">
+    <button class="btn">Готово</button>
+    <div class="result"></div>
+    <script>
+        let fullName = "";
+        const btn = document.querySelector(".btn");
+        function nameConverter() {
+            const input = document.querySelector("input");
+            fullName += input.value;
+            fullName = input.value.replace(/[a-zа-я]+/gi, (match) => match[0].toUpperCase()+match.substr(1));
+            input.value = ""
+            let str = fullName.split(" ")
+            let firstName = str[1]
+            let fathersName = str[2]
+            let lastName = str[0]
+
+            document.querySelector(".result").textContent = `Фамилия: ${lastName}, Имя: ${firstName}, Отчество: ${fathersName}`
+        }
+        btn.addEventListener("click", nameConverter)
+
+    </script>
+</body>
+</html>
