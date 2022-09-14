@@ -7,21 +7,33 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" placeholder="ФИО">
+    <input type="text" placeholder="Фамилия Имя Отчество">
     <button class="btn">Готово</button>
     <div class="result"></div>
     <script>
-        let fullName = "";
+        let input = document.querySelector("input");
         const btn = document.querySelector(".btn");
         function nameConverter() {
-            const input = document.querySelector("input");
-            fullName += input.value;
-            fullName = input.value.replace(/[a-zа-я]+/gi, (match) => match[0].toUpperCase()+match.substr(1));
-            input.value = ""
-            let str = fullName.split(" ")
-            let firstName = str[1]
-            let fathersName = str[2]
-            let lastName = str[0]
+            let full_name = input.value.toLowerCase();
+            full_name = full_name.replace(/ +/g, ' ').replace(/[^a-zа-яё\s-]/gi, '').trim();
+            if (full_name == "") {
+                alert("Введите ФИО!");
+
+            }
+
+            let arr = full_name.split(" ");
+            let result = [];
+
+            arr.forEach(element => {
+                element = element[0].toUpperCase() + element.slice(1);
+                result.push(element);
+                input.value = ""
+            })
+
+            let firstName = result[1];
+            let fathersName = result[2];
+            let lastName = result[0];
+        
 
             document.querySelector(".result").textContent = `Фамилия: ${lastName}, Имя: ${firstName}, Отчество: ${fathersName}`
         }
